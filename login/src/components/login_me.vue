@@ -73,7 +73,7 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-  @import "https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.css";
+  /*@import "https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.css";*/
     h1, h2 {
         font-weight: normal;
     }

@@ -10,90 +10,136 @@
 @time: 2017/11/26 下午3:16
 -->
 
-
 <template>
   <div class="container">
-    <div class="row">
-  <div class="col-md-10 col-md-offset-6">
-    <div class="thumbnail">
-      <div class="caption" :name="coursedetail.id">
-        <h3>{{coursedetail.course.name}}</h3>
-        <p>课时:{{coursedetail.hour}}</p>
-        <p>course_img:{{coursedetail.course_img}}</p>
-        <p>course_slogan:{{coursedetail.course_slogan}}</p>
-        <p>video_brief_link:{{coursedetail.video_brief_link}}</p>
-        <p>why_study:{{coursedetail.why_study}}</p>
-        <p>what_to_study_brief:{{coursedetail.what_to_study_brief}}</p>
-        <p>areer_improvement:{{coursedetail.career_improvement}}</p>
-        <p>prerequisite:{{coursedetail.prerequisite}}</p>
-        <p v-for=" i in coursedetail.teacherss ">teacher:{{i.name}}</p>
-        <div v-for="i in coursedetail.courseprices">
-          <p><a href="#" class="btn btn-primary" role="button" :alt="i.id">{{i.valid_period}}/{{i.price}} </a></p>
+
+    <div class="caption" :name="coursedetail.id">
+      <div class="row">
+        <h3 class="col-md-12">{{courseName}}</h3>
       </div>
+      <!--列表开始-->
+      <table class="table table-striped table-bordered table-hover ">
+        <thead>
+        <tr>
+          <td>标题</td>
+          <td>内容</td>
+        </tr>
+        </thead>
+        <tbody>
+        <!--<tr>-->
+        <!--<td>课时:</td>-->
+        <!--<td>{{coursedetail.hour}}</td>-->
+        <!--</tr>-->
+        <tr>
+          <td>course_img</td>
+          <td>{{coursedetail.course_img}}</td>
+        </tr>
+        <tr>
+          <td>course_slogan</td>
+          <td>{{coursedetail.course_slogan}}</td>
+        </tr>
+        <tr>
+          <td>video_brief_link</td>
+          <td>{{coursedetail.video_brief_link}}</td>
+        </tr>
+        <tr>
+          <td>why_study</td>
+          <td>{{coursedetail.why_study}}</td>
+        </tr>
+        <tr>
+          <td>what_to_study_brief</td>
+          <td>{{coursedetail.what_to_study_brief}}</td>
+        </tr>
+        <tr>
+          <td>career_improvement</td>
+          <td>{{coursedetail.areer_improvement}}</td>
+        </tr>
+        <tr>
+          <td>prerequisite</td>
+          <td>{{coursedetail.prerequisite}}</td>
+        </tr>
+        <tr>
+          <td>teacher</td>
+          <td><span v-for=" i in coursedetail.teacherss ">{{i.name}}</span></td>
+        </tr>
+        </tbody>
+      </table>
+      <!--列表结束-->
+      <!--策略开始-->
+      <ul>
+        <li v-for="i in coursedetail.courseprices">
+          <a class="btn btn-primary btn-group" role="button" :alt="i.id">{{i.valid_period}}/{{i.price}} </a>
+        </li>
+      </ul>
+      <!--策略结束-->
+      <!--按钮开始-->
+      <div>
+        <a class="btn btn-success">加入购物车</a>
+      </div>
+      <!--按钮结束-->
+
     </div>
+
   </div>
-</div>
-    </div>
-    </div>
+
 </template>
 
 <script>
-    export default {
+  export default {
 //        name: 'HelloWorld',
-        data() {
-            return {
-                msg: 'Welcome to Your course_detail',
-                coursedetail:'',
-//                id:"",
-            }
-        },
-        mounted:function(){
-          this.showList();
-        },
-        methods:{
-          showList(){
-            var url="http://127.0.0.1:8000/course/";
-            var self = this;
-            this.$axios.get(url,{
-              params: {
-                  id:self.$route.params.id
-              }
-            }).then(function(res){
-//              console.log(res)
-              self.coursedetail=res.data;
-//              alert(self.coursedetail)
-              console.log(self.coursedetail);
+    data() {
+      return {
+        msg: 'Welcome to Your course_detail',
+        coursedetail: '',
+        courseName: '',
+        cid: '',
+      }
+    },
+    mounted: function () {
+      this.showData();
+    },
+    methods: {
+      showData(){
+        var url = "http://127.0.0.1:8000/api/v1/course/";
+        var self = this;
+        this.$axios.get(url, {
+          params: {
+            id: self.$route.params.id
+          }
+        }).then(function (res) {
+          self.coursedetail = res.data;
+          self.courseName = res.data.course.name;
+          self.cid = res.data.id
 
-
-//              console.log(self.coursedetail.teacherss.name)
-//              console.log(typeof (self.coursedetail.teacherss))
-//               console.log(self.coursedetail.teacherss[0].name)
-            }).catch(function (error) {
-               console.log(error);
-           })
-          },
-        }
+//          console.log(self.coursedetail.teacherss.name)
+//          console.log(typeof (self.coursedetail.teacherss))
+//          console.log(self.coursedetail.teacherss[0].name)
+        }).catch(function (error) {
+          console.log(error);
+        })
+      },
     }
+  }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-     @import "https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.css";
-    h1, h2 {
-        font-weight: normal;
-    }
+  /*@import "../assets/bootstrap/css/bootstrap.css";*/
+  h1, h2 {
+    font-weight: normal;
+  }
 
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
 
-    li {
-        display: inline-block;
-        margin: 0 10px;
-    }
+  li {
+    display: inline-block;
+    margin: 0 10px;
+  }
+  a {
+    color: white!important;
+  }
 
-    a {
-        color: #42b983;
-    }
 </style>

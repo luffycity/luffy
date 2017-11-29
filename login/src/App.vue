@@ -33,19 +33,13 @@
     }
 }
 </script>
+
 <style>
-  @import "https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.css";
-</style>
-<style>
-html,body{height:100%}
-.wrap{min-height:100%}
-.main{padding-bottom:30px;overflow:hidden;}
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    margin-top: 60px;
+  }
 </style>
