@@ -4,8 +4,6 @@ import HelloWorld from '@/components/HelloWorld'
 import login from '@/components/login'
 import course_list from '@/components/course_list'
 import course from '@/components/course'
-import courses from '@/components/courses'
-import header from '@/header/head'
 
 Vue.use(Router)
 
@@ -15,11 +13,6 @@ export default new Router({
       path: '/',
       name: 'HelloWorld',
       component: HelloWorld
-    },
-    {
-      path: '/courses',
-      name: 'courses',
-      component: courses
     },
     {
       path:'/login',

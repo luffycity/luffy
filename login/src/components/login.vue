@@ -44,24 +44,16 @@
         },
         methods:{
           login:function () {
-           var url="http://127.0.0.1:8000/login/";
+           var url="http://127.0.0.1:8000/api/v1/login/";
            var self=this;
-           var $cookie=this.$cookie
+//           var $cookie=this.$cookie;
             this.$axios.post(url,{
               username:this.username,
               password:this.password,
-            },{
-//             "headers":{"Content-Type":"application/x-www-form-urlencodeed"}
+            }, {
            }).then(function (res) {
-//             console.log(res);
-              self.$store.commit('saveToken',res.data.username,res.data.token);
-             console.log(res);
-//             $cookie.set("token",res.data.token);
-//             $cookie.set("username",res.data.username);
-//             self.$router.push("/course_list/")
+               self.$store.commit('saveToken',{username:res.data.username,token:res.data.token});
              self.$router.push(self.$route.query.next)
-//              console.log($cookie.get("token"));
-//              console.log($cookie.get("username"));
            }).catch(function (error) {
                console.log(error);
            })

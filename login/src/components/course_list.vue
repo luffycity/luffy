@@ -52,7 +52,6 @@
       return {
         msg: 'Welcome to Your course_list',
         name: "",
-//                courselist:{'name':''},
         courselist: [],
         detail: '',
         isshow: true,
@@ -63,9 +62,10 @@
     },
     methods: {
       showList(){
-        var url = "http://127.0.0.1:8000/api/v1/course_list/";
+        var url = this.$store.state.apiList.courses;
         var self = this;
-        this.$axios.get(url).then(function (res) {
+        this.$axios.get(url)
+          .then(function (res) {
           self.courselist = res.data;
         }).catch(function (error) {
           console.log(error);
@@ -86,7 +86,6 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  /*@import "https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.css";*/
 /*@import "../assets/bootstrap/css/bootstrap.css";*/
   h1, h2 {
     font-weight: normal;

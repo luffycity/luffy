@@ -10,23 +10,24 @@ export default new Vuex.Store({
     username: Cookie.get('username'),
     token: Cookie.get('token'),
     apiList: {
-      auth: 'http://127.0.0.1:8000/login/',
-      courses: 'http://127.0.0.1:8000/course_list/',
+      auth: 'http://127.0.0.1:8000/api/v1/login/',
+      courses: 'http://127.0.0.1:8000/api/v1/course_list/',
     }
   },
   mutations: {
     // 组件中通过 this.$store.commit(saveToken,参数)  调用
-    saveToken: function (state, username, token) {
-      state.username = username;
-      Cookie.set("username", username, "20min");
-      Cookie.set("token", token, "20min")
+    saveToken: function (state, usernameToken) {
+      state.username = usernameToken.username;
+      state.token = usernameToken.token;
+      Cookie.set("username", usernameToken.username, "20min");
+      Cookie.set("token", usernameToken.token, "20min");
 
     },
     clearToken: function (state) {
-      state.username = null
-      Cookie.remove('username')
-      Cookie.remove('token')
-
+      state.username = null;
+      Cookie.remove('username');
+      Cookie.remove('token');
+      console.log(Cookie.get('token'))
     }
   },
 

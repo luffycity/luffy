@@ -29,15 +29,12 @@
         name: 'HelloWorld',
         data() {
             return {
-                msg: 'Welcome to Your myfoot',
                 f:['关于我们','联系我们','商务合作','帮助中心','意见反馈','新手指南']
-
             }
         }
     }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
      /*@import "https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.css";*/
      .footWrap {

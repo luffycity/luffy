@@ -14,9 +14,11 @@
   <div class="container">
 
     <div class="caption" :name="coursedetail.id">
+
       <div class="row">
         <h3 class="col-md-12">{{courseName}}</h3>
       </div>
+
       <!--列表开始-->
       <table class="table table-striped table-bordered table-hover ">
         <thead>
@@ -68,13 +70,13 @@
       <!--策略开始-->
       <ul>
         <li v-for="i in coursedetail.courseprices">
-          <a class="btn btn-primary btn-group" role="button" :alt="i.id">{{i.valid_period}}/{{i.price}} </a>
+          <a class="btn btn-primary btn-group" role="button" :alt="i.id" @click="updatePid(i.id)">{{i.valid_period}}/{{i.price}} </a>
         </li>
       </ul>
       <!--策略结束-->
       <!--按钮开始-->
       <div>
-        <a class="btn btn-success">加入购物车</a>
+        <a class="btn btn-success" @click="addCar">加入购物车</a>
       </div>
       <!--按钮结束-->
 
@@ -93,6 +95,7 @@
         coursedetail: '',
         courseName: '',
         cid: '',
+        pid: '',
       }
     },
     mounted: function () {
@@ -100,24 +103,40 @@
     },
     methods: {
       showData(){
-        var url = "http://127.0.0.1:8000/api/v1/course/";
+        var cid = this.$route.params.id
+        var url = "http://127.0.0.1:8000/api/v1/course/"+cid+'/';
         var self = this;
-        this.$axios.get(url, {
-          params: {
-            id: self.$route.params.id
-          }
-        }).then(function (res) {
+        this.$axios.get(url)
+          .then(function (res) {
           self.coursedetail = res.data;
-          self.courseName = res.data.course.name;
+          console.log(res.data)
+          self.courseName = res.data.course_name;
+          console.log(self.courseName)
           self.cid = res.data.id
-
-//          console.log(self.coursedetail.teacherss.name)
-//          console.log(typeof (self.coursedetail.teacherss))
-//          console.log(self.coursedetail.teacherss[0].name)
         }).catch(function (error) {
           console.log(error);
         })
       },
+      updatePid(pid){
+          this.pid = pid
+      },
+      addCar(){
+          var url = "http://127.0.0.1:8000/api/v1/add_goods/"
+          this.$axios.request({
+            method: 'POST',
+            url:url,
+            data:{
+              course_id:this.cid,
+              period_id:this.pid,
+              token:this.$store.state.token
+            }
+            }).then(function (response) {
+                console.log(response)
+          }).catch(function (error) {
+
+          })
+
+      }
     }
   }
 </script>
