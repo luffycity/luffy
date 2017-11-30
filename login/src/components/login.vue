@@ -21,7 +21,7 @@
           <input type="text" class="form-control" id="username" placeholder="username" name="username" v-model="username" >
         </div>
         <div class="form-group">
-          <!--<label for="exampleInputPassword1">Password</label>-->
+          <label for="exampleInputPassword1">Password</label>
           <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password" v-model="password">
         </div>
         <p><input type="button" class="btn btn-primary" value="登陆" v-on:click="login"></p>
